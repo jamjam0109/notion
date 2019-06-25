@@ -1,32 +1,37 @@
 from selenium import webdriver
 from datetime import datetime
 
+def create_output(title, date, url):
+    output = list()
+
+    output.append(title)
+    output.append(date)
+    output.append(url)
+
+    return output
+
+
 chromedriver_path = './chromedriver'
 
 driver = webdriver.Chrome(chromedriver_path)
 
 output = dict()
 
-tensorflow_home = 'https://medium.com/tensorflow'
-driver.get(tensorflow_home)
-tensorflow = driver.find_element_by_css_selector('div.u-lineHeightBase.postItem.u-marginRight3')
-tensorflow_title = tensorflow.text
-
-tensorflow_date = driver.find_element_by_css_selector(
-    'div.ui-caption.u-fontSize12.u-baseColor--textNormal.u-textColorNormal.js-postMetaInlineSupplemental'
-)
-tensorflow_date = tensorflow_date.find_element_by_css_selector('time').get_attribute('datetime')
-tensorflow_date = tensorflow_date.split('T')[0]
-
-tensorflow_url = tensorflow.find_element_by_css_selector('a').get_attribute('href')
-
-tensorflow_output = list()
-
-tensorflow_output.append(tensorflow_title)
-tensorflow_output.append(tensorflow_date)
-tensorflow_output.append(tensorflow_url)
-
-output['TensorFlow'] = tensorflow_output
-
-print(output)
+brandi_home = 'https://www.kakaobrain.com/blog'
+driver.get(brandi_home)
+brandi = driver.find_element_by_css_selector('div.col-xs-12.bdoc_title')
+# brandi_txt = brandi.find_element_by_css_selector('a').text
+# print(brandi_txt)
+# brandi_list = brandi_txt.split('\n')
+#
+# brandi_title = brandi_list[0]
+# brandi_date = brandi_list[2]
+brandi_url = brandi.find_element_by_css_selector('a').get_attribute('href')
+print(brandi_url)
+# brandi_output = create_output(brandi_title, brandi_date, brandi_url)
+# output['브랜디'] = brandi_output
+#
+# print(output)
 driver.close()
+
+

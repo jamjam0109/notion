@@ -17,19 +17,20 @@ driver = webdriver.Chrome(chromedriver_path)
 
 output = dict()
 
-brandi_home = 'https://www.kakaobrain.com/blog'
-driver.get(brandi_home)
-brandi = driver.find_element_by_css_selector('div.col-xs-12.bdoc_title')
-# brandi_txt = brandi.find_element_by_css_selector('a').text
-# print(brandi_txt)
-# brandi_list = brandi_txt.split('\n')
+tmon_home = 'http://engineering.vcnc.co.kr/'
+driver.get(tmon_home)
+tmon = driver.find_element_by_css_selector('div.col-sm-4.featured-item')
+tmon_txt = tmon.text
+tmon_list = tmon_txt.split('\n')
+
+# tmon_url = tmon.find_element_by_css_selector('a').get_attribute('href')
 #
-# brandi_title = brandi_list[0]
-# brandi_date = brandi_list[2]
-brandi_url = brandi.find_element_by_css_selector('a').get_attribute('href')
-print(brandi_url)
-# brandi_output = create_output(brandi_title, brandi_date, brandi_url)
-# output['브랜디'] = brandi_output
+# tmon_date = driver.find_element_by_css_selector('td.date').text
+# tmon_date = tmon_date.replace('.', '')
+# tmon_date = tmon_date.replace(' ', '-')
+#
+# tmon_output = create_output(tmon_title, tmon_date, tmon_url)
+# output['티몬'] = tmon_output
 #
 # print(output)
 driver.close()

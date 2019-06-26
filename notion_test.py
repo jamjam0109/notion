@@ -1,5 +1,4 @@
 from notion.client import *
-from notion.block import *
 
 token = 'b10d49a16fe9ad2db279f0fd4c3fbd8ef53d2748b2e9c63fca0e382d234b880262994cffba849a46702f71b9cc731cfe897fed9a0fedd942b24ea5aa89359adbbc235114357383b32be4fc460999'
 
@@ -9,5 +8,5 @@ client = NotionClient(token_v2=token)
 
 cv = client.get_collection_view(notion_page_url)
 
-
+rows = cv.collection.get_rows()
 

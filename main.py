@@ -10,7 +10,7 @@ from datetime import datetime
 
 
 def crawling():
-    chromedriver_path = './chromedriver'
+    chromedriver_path = './chromedriver_v75'
 
     driver = webdriver.Chrome(chromedriver_path)
 
@@ -21,20 +21,20 @@ def crawling():
     요약있음
     안됌....
     '''
-    naver_d2_home = 'https://d2.naver.com/home'
-    driver.get(naver_d2_home)
-    naver_d2 = driver.find_element_by_class_name('post_article')
-    naver_d2_txt = naver_d2.text
-
-    naver_d2_list = naver_d2_txt.split('\n')
-    naver_d2_title = naver_d2_list[0]
-    naver_d2_date = naver_d2_list[-3]
-    naver_d2_date = naver_d2_date.replace('.', '-')
-    naver_d2_url = naver_d2.find_element_by_css_selector('a').get_attribute('href')
-
-    naver_d2_output = create_output(naver_d2_title, naver_d2_date, naver_d2_url)
-
-    output['NAVER D2'] = naver_d2_output
+    # naver_d2_home = 'https://d2.naver.com/home'
+    # driver.get(naver_d2_home)
+    # naver_d2 = driver.find_element_by_class_name('post_article')
+    # naver_d2_txt = naver_d2.text
+    #
+    # naver_d2_list = naver_d2_txt.split('\n')
+    # naver_d2_title = naver_d2_list[0]
+    # naver_d2_date = naver_d2_list[-3]
+    # naver_d2_date = naver_d2_date.replace('.', '-')
+    # naver_d2_url = naver_d2.find_element_by_css_selector('a').get_attribute('href')
+    #
+    # naver_d2_output = create_output(naver_d2_title, naver_d2_date, naver_d2_url)
+    #
+    # output['NAVER D2'] = naver_d2_output
 
     '''
     스포카
@@ -108,6 +108,7 @@ def crawling():
     '''
     samsung sds
     요약 있음
+    시간 오래걸림
     '''
     samsung_sds_home = 'https://www.samsungsds.com/global/ko/support/insights/index.html'
     driver.get(samsung_sds_home)
@@ -331,6 +332,9 @@ def crawling():
     zigzag_output = create_output(zigzag_title, zigzag_date, zigzag_url)
     output['지그재그'] = zigzag_output
 
+    '''
+    브랜디
+    '''
     brandi_home = 'http://labs.brandi.co.kr/'
     driver.get(brandi_home)
     brandi = driver.find_element_by_css_selector('ul.post-list')
@@ -349,10 +353,20 @@ def crawling():
 
 
 def notion_write(token, notion_page_url, crwaling_output):
-
     client = NotionClient(token_v2=token)
-
     cv = client.get_collection_view(notion_page_url)
+
+    rows = cv.collection.get_rows()
+    # Clear
+    for row in rows:
+        client.submit_transaction(
+            build_operation(
+                id=row.id,
+                path=[],
+                args={"alive": False},
+                command="update",
+            )
+        )
 
     cv.collection.description = f'**Update Date: {datetime.now().strftime("%Y-%m-%d %H:%M")}**'
 

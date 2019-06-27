@@ -1,5 +1,6 @@
-from selenium import webdriver
+import requests
 from datetime import datetime
+from bs4 import BeautifulSoup
 
 def create_output(title, date, url):
     output = list()
@@ -10,29 +11,31 @@ def create_output(title, date, url):
 
     return output
 
-
-chromedriver_path = './chromedriver'
-
-driver = webdriver.Chrome(chromedriver_path)
-
 output = dict()
 
-tmon_home = 'http://engineering.vcnc.co.kr/'
-driver.get(tmon_home)
-tmon = driver.find_element_by_css_selector('div.col-sm-4.featured-item')
-tmon_txt = tmon.text
-tmon_list = tmon_txt.split('\n')
+woowabros_home = 'http://blog.naver.com/PostList.nhn?blogId=tmondev&categoryNo=0&from=postList'
+req = requests.get(woowabros_home)
+html = req.text
+soup = BeautifulSoup(html, 'html.parser')
 
-# tmon_url = tmon.find_element_by_css_selector('a').get_attribute('href')
+woowabros = soup.find("div", {"class": "wrap_td"})
+print(woowabros)
+# woowabros_url = 'https://www.samsungsds.com' + woowabros.find('a')['onclick']
+# print(woowabros_url )
+# woowabros_title = woowabros.find('h2').text
 #
-# tmon_date = driver.find_element_by_css_selector('td.date').text
-# tmon_date = tmon_date.replace('.', '')
-# tmon_date = tmon_date.replace(' ', '-')
+# woowabros_date = woowabros.find('span').text
+# woowabros_date = woowabros_date.split('\n')
+# woowabros_date = woowabros_date[0]
 #
-# tmon_output = create_output(tmon_title, tmon_date, tmon_url)
-# output['티몬'] = tmon_output
+# woowabros_date = woowabros_date.replace(',', '')
+# woowabros_date = woowabros_date.split(' ')
+# woowabros_date = woowabros_date[2] + '-' + woowabros_date[0] + '-' + woowabros_date[1]
 #
-# print(output)
-driver.close()
+# woowabros_output = create_output(woowabros_title, woowabros_date, woowabros_url)
+#
+# output['woowabros'] = woowabros_output
+#
+print(output)
 
 

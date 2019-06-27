@@ -1,38 +1,31 @@
-from selenium import webdriver
+import requests
 from datetime import datetime
+from bs4 import BeautifulSoup
+from utils import date_form, create_output
 
-def create_output(title, date, url):
-    output = list()
-
-    output.append(title)
-    output.append(date)
-    output.append(url)
-
-    return output
-
-
-chromedriver_path = './chromedriver'
-
-driver = webdriver.Chrome(chromedriver_path)
 
 output = dict()
 
-tmon_home = 'http://engineering.vcnc.co.kr/'
-driver.get(tmon_home)
-tmon = driver.find_element_by_css_selector('div.col-sm-4.featured-item')
-tmon_txt = tmon.text
-tmon_list = tmon_txt.split('\n')
+sualab_home = 'https://engineering.linecorp.com/ko/blog/'
+req = requests.get(sualab_home)
+html = req.text
+soup = BeautifulSoup(html, 'html.parser')
 
-# tmon_url = tmon.find_element_by_css_selector('a').get_attribute('href')
+sualab = soup.find("div", {"class": "entry-header-text-top text-left"})
+
+sualab_title = sualab.find('a').text
+print(sualab_title)
+sualab_url = sualab.find('a')['href']
+print(sualab_url)
+sualab_date = soup.find("span", {"class": "byline"}).text
+sualab_date = sualab_date.split('| ')
+print(sualab_date )
+# sualab_date = sualab_date[2] + '-' + sualab_date[0] + '-' + sualab_date[1]
+# sualab_date = date_form(sualab_date)
 #
-# tmon_date = driver.find_element_by_css_selector('td.date').text
-# tmon_date = tmon_date.replace('.', '')
-# tmon_date = tmon_date.replace(' ', '-')
-#
-# tmon_output = create_output(tmon_title, tmon_date, tmon_url)
-# output['티몬'] = tmon_output
-#
-# print(output)
-driver.close()
+# sualab_output = create_output(sualab_title, sualab_date, sualab_url)
+# output['SUALAB'] = sualab_output
+
+print(output)
 
 

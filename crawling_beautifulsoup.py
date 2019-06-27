@@ -142,44 +142,43 @@ def crawling():
     카테고리 다양
     '''
     ncsoft_home = 'http://blog.ncsoft.com/?cat=3786'
-    driver.get(ncsoft_home)
+    req = requests.get(ncsoft_home)
+    html = req.text
+    soup = BeautifulSoup(html, 'html.parser')
 
-    ncsoft_home = driver.find_element_by_css_selector(
-        'h2.sgny-post-title.sgny-masonary-post-title'
-    )
+    ncsoft = soup.find("h2", {"class": "sgny-post-title sgny-masonary-post-title"})
 
-    ncsoft_title = ncsoft_home.text
-    ncsoft_url = ncsoft_home.find_element_by_css_selector('a').get_attribute('href')
+    ncsoft_title = ncsoft.find('a').text
+    ncsoft_url = ncsoft_home + ncsoft.find('a')['href']
 
-    ncsoft_date = driver.find_element_by_css_selector(
-        'div.text-uppercase.sgny-post-meta.sgny-masonary-post-meta'
-    ).text
+    ncsoft_date = soup.find("span", {"class": "sgny-post-date"}).text
+    ncsoft_date = ncsoft_date.replace('\t', '')
+    ncsoft_date = ncsoft_date.replace('\n', '')
 
     ncsoft_output = create_output(ncsoft_title, ncsoft_date, ncsoft_url)
-
-    output['ncsoft'] = ncsoft_output
+    output['NC Soft'] = ncsoft_output
 
     '''
     SUALAB
     요약 없음
     '''
-    sualab_home = 'http://research.sualab.com/'
-    driver.get(sualab_home)
+    sualab_home = 'http://research.sualab.com'
+    req = requests.get(sualab_home)
+    html = req.text
+    soup = BeautifulSoup(html, 'html.parser')
 
-    sualab_home = driver.find_element_by_css_selector('a.post-link')
+    sualab = soup.find("a", {"class": "post-link"})
 
-    sualab_title = sualab_home.text
+    sualab_title = sualab.text
+    sualab_url = sualab_home + sualab['href']
 
-    sualab_url = sualab_home.get_attribute('href')
-
-    sualab_date = driver.find_element_by_css_selector('span.post-meta').text
+    sualab_date = soup.find("span", {"class": "post-meta"}).text
     sualab_date = sualab_date.replace(',', '')
     sualab_date = sualab_date.split(' ')
     sualab_date = sualab_date[2] + '-' + sualab_date[0] + '-' + sualab_date[1]
     sualab_date = date_form(sualab_date)
 
     sualab_output = create_output(sualab_title, sualab_date, sualab_url)
-
     output['SUALAB'] = sualab_output
 
     '''
@@ -318,15 +317,17 @@ def crawling():
     '''
     브랜디
     '''
-    brandi_home = 'http://labs.brandi.co.kr/'
-    driver.get(brandi_home)
-    brandi = driver.find_element_by_css_selector('ul.post-list')
-    brandi_txt = brandi.text
-    brandi_list = brandi_txt.split('\n')
+    brandi_home = 'http://labs.brandi.co.kr'
+    req = requests.get(brandi_home)
+    html = req.text
+    soup = BeautifulSoup(html, 'html.parser')
 
-    brandi_title = brandi_list[0]
-    brandi_date = brandi_list[2]
-    brandi_url = brandi.find_element_by_css_selector('a').get_attribute('href')
+    brandi = soup.find("ul", {"class": "post-list"})
+
+    brandi_title = brandi.find('a').text
+    brandi_url = brandi_home + brandi.find('a')['href']
+
+    brandi_date = soup.find("div", {"class": "post-date"}).text
 
     brandi_output = create_output(brandi_title, brandi_date, brandi_url)
     output['브랜디'] = brandi_output

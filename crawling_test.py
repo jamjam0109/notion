@@ -1,41 +1,31 @@
 import requests
 from datetime import datetime
 from bs4 import BeautifulSoup
+from utils import date_form, create_output
 
-def create_output(title, date, url):
-    output = list()
-
-    output.append(title)
-    output.append(date)
-    output.append(url)
-
-    return output
 
 output = dict()
 
-woowabros_home = 'http://blog.naver.com/PostList.nhn?blogId=tmondev&categoryNo=0&from=postList'
-req = requests.get(woowabros_home)
+sualab_home = 'https://engineering.linecorp.com/ko/blog/'
+req = requests.get(sualab_home)
 html = req.text
 soup = BeautifulSoup(html, 'html.parser')
 
-woowabros = soup.find("div", {"class": "wrap_td"})
-print(woowabros)
-# woowabros_url = 'https://www.samsungsds.com' + woowabros.find('a')['onclick']
-# print(woowabros_url )
-# woowabros_title = woowabros.find('h2').text
+sualab = soup.find("div", {"class": "entry-header-text-top text-left"})
+
+sualab_title = sualab.find('a').text
+print(sualab_title)
+sualab_url = sualab.find('a')['href']
+print(sualab_url)
+sualab_date = soup.find("span", {"class": "byline"}).text
+sualab_date = sualab_date.split('| ')
+print(sualab_date )
+# sualab_date = sualab_date[2] + '-' + sualab_date[0] + '-' + sualab_date[1]
+# sualab_date = date_form(sualab_date)
 #
-# woowabros_date = woowabros.find('span').text
-# woowabros_date = woowabros_date.split('\n')
-# woowabros_date = woowabros_date[0]
-#
-# woowabros_date = woowabros_date.replace(',', '')
-# woowabros_date = woowabros_date.split(' ')
-# woowabros_date = woowabros_date[2] + '-' + woowabros_date[0] + '-' + woowabros_date[1]
-#
-# woowabros_output = create_output(woowabros_title, woowabros_date, woowabros_url)
-#
-# output['woowabros'] = woowabros_output
-#
+# sualab_output = create_output(sualab_title, sualab_date, sualab_url)
+# output['SUALAB'] = sualab_output
+
 print(output)
 
 

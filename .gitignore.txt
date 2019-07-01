@@ -1,2 +1,4 @@
-.idea
+.idea/misc.xml
+.idea/notion.iml
+.idea/workspace.xml
 __pycache__/

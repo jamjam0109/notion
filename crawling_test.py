@@ -6,26 +6,23 @@ from utils import date_form, create_output
 
 output = dict()
 
-sualab_home = 'https://engineering.linecorp.com/ko/blog/'
-req = requests.get(sualab_home)
+aws_korea_home = 'https://meetup.toast.com'
+req = requests.get(aws_korea_home)
 html = req.text
 soup = BeautifulSoup(html, 'html.parser')
 
-sualab = soup.find("div", {"class": "entry-header-text-top text-left"})
-
-sualab_title = sualab.find('a').text
-print(sualab_title)
-sualab_url = sualab.find('a')['href']
-print(sualab_url)
-sualab_date = soup.find("span", {"class": "byline"}).text
-sualab_date = sualab_date.split('| ')
-print(sualab_date )
-# sualab_date = sualab_date[2] + '-' + sualab_date[0] + '-' + sualab_date[1]
-# sualab_date = date_form(sualab_date)
+aws_korea = soup.find("div", {"class": "sec_box"})
+# print(aws_korea)
+print(aws_korea.find('h3').text)
+# aws_korea_url = aws_korea.find('a')['href']
 #
-# sualab_output = create_output(sualab_title, sualab_date, sualab_url)
-# output['SUALAB'] = sualab_output
-
-print(output)
+# aws_korea_date = soup.find("time", {"property": "datePublished"})
+# aws_korea_date = aws_korea_date.text.split(' ')
+# aws_korea_date = aws_korea_date[2] + '-' + aws_korea_date[1] + '-' + aws_korea_date[0]
+#
+# aws_korea_output = create_output(aws_korea_title, aws_korea_date, aws_korea_url)
+# output['AWS 한국 블록,'] = aws_korea_output
+#
+# print(output)
 
 

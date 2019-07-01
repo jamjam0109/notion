@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9374491f-281a-4931-85fd-1d4dad995582" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore.txt" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/notion.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/notion.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crawling_beautifulsoup.py" beforeDir="false" afterPath="$PROJECT_DIR$/crawling_beautifulsoup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crawling_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/crawling_test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -11,79 +16,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/crawling_beautifulsoup.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9126">
-              <caret line="353" selection-start-line="353" selection-end-line="353" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
-              <folding>
-                <element signature="e#0#27#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/crawling_selenium.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="884">
-              <caret line="35" column="42" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/crawling_test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="10" column="15" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="416">
-                <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="5" lean-forward="true" selection-start-column="5" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -101,10 +33,8 @@
       <find>ㅜㅁ</find>
       <find>|</find>
       <find>naver_D2</find>
-      <find>line_engine</find>
       <find>toast</find>
       <find>aws_korea</find>
-      <find>naver_labs</find>
       <find>close</find>
       <find>form</find>
       <find>sua</find>
@@ -115,21 +45,26 @@
       <find>sas</find>
       <find>woowabros</find>
       <find>brandi</find>
+      <find>enginer</find>
+      <find>sualab</find>
+      <find>line_engine</find>
+      <find>tensorflow</find>
+      <find>naver_labs</find>
     </findStrings>
     <replaceStrings>
       <replace>kakao</replace>
       <replace>sualab</replace>
-      <replace>line_engine</replace>
       <replace>toast</replace>
-      <replace>aws_korea</replace>
-      <replace>naver_labs</replace>
-      <replace>tensorflow</replace>
       <replace>daangn</replace>
       <replace>tmon</replace>
       <replace>sas</replace>
       <replace>woowabros</replace>
       <replace>brandi</replace>
       <replace>ncsoft</replace>
+      <replace>line_engine</replace>
+      <replace>tensorflow</replace>
+      <replace>naver_labs</replace>
+      <replace>aws_korea</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\ktnexr\Desktop\jaemin\dev\notion</dir>
@@ -266,15 +201,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/crawling_beautifulsoup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9126">
-          <caret line="353" selection-start-line="353" selection-end-line="353" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils.py">
       <provider selected="true" editor-type-id="text-editor" />
@@ -290,18 +216,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/crawling_selenium.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="35" column="42" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/crawling_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="10" column="15" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
+            <marker date="1561708008968" expanded="true" signature="407:750" ph="..." />
           </folding>
         </state>
       </provider>

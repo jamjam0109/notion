@@ -15,6 +15,20 @@ Python과 Notion을 활용하여 기술 블로그 리스트 만들기
     6. 최근 3개월 이전 글은 보여주지 말까? 왜? 그냥 ..
     7. 블로그 글 Word Cloud 만들어서 이미지를 넣고 싶어
     
+* 190703
+    1. 뷰티풀숲으로 갈아 탔는데 아직 티몬, 지그재그, 토스트, 엔비디아, SDS는 못함
+        * SDS의 경우 한글이 다 깨진다.
+        * 나머진 긁어오는게 어렵다...
+        * **이번주까지 못하면(190707) 못한 애들은 셀레니움으로 임시방편하자**
+    2. 이번 주 토요일(190706)에는 개인블로그 크롤링을 진행하자
+ 
+## 변경이력
+
+<details><summary>190726</summary>
+<p>
+
+* ncsoft UI 변경 됨
+
     
  ## 참고
 * <a href="https://github.com/jamalex/notion-py" target="_blank">Unofficial Python 3 client for Notion API</a>

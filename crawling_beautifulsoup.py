@@ -118,6 +118,7 @@ def crawling():
     요약 있음
     카테고리가 넘모 많음, 일단 딥러닝만 
     시간이 넘모 걸림
+    403 error 뜸
     '''
     nvidia_home = 'https://blogs.nvidia.co.kr/category/deep-learning/'
     driver.get(nvidia_home)
@@ -186,22 +187,22 @@ def crawling():
     요약 있음
     '''
     line_engine_home = 'https://engineering.linecorp.com/ko/blog/'
-    driver.get(line_engine_home)
-    line_engine = driver.find_element_by_css_selector('div.entry-header-text-top.text-left')
-    line_engine_txt = line_engine.text
-    line_engine_list = line_engine_txt.split('\n')
+    req = requests.get(line_engine_home)
+    html = req.text
+    soup = BeautifulSoup(html, 'html.parser')
 
-    line_engine_title = line_engine_list[0]
+    line_engine = soup.find("div", {"class": "entry-header-text-top text-left"})
 
-    line_engine_date = line_engine_list[1].split('|')
-    line_engine_date = line_engine_date[1].replace(' ', '')
-    line_engine_date = line_engine_date.replace('.', '-')
+    line_engine_title = line_engine.find('a').text
 
-    line_engine_url = line_engine.find_element_by_css_selector('a').get_attribute('href')
+    line_engine_url = line_engine.find('a')['href']
+
+    line_engine_date = soup.find("span", {"class": "byline"}).text
+    line_engine_date = line_engine_date.split('|')[1]
+    line_engine_date = line_engine_date.replace(u'\xa0', u'')
 
     line_engine_output = create_output(line_engine_title, line_engine_date, line_engine_url)
-
-    output['LINE Engineering'] = line_engine_output
+    output['line_engine'] = line_engine_output
 
     '''
     TOAST
@@ -231,65 +232,61 @@ def crawling():
     요약 있음
     '''
     aws_korea_home = 'https://aws.amazon.com/ko/blogs/korea/'
-    driver.get(aws_korea_home)
-    aws_korea = driver.find_element_by_css_selector('div.lb-col.lb-mid-18.lb-tiny-24')
-    aws_korea_txt = aws_korea.text
+    req = requests.get(aws_korea_home)
+    html = req.text
+    soup = BeautifulSoup(html, 'html.parser')
 
-    aws_korea_list = aws_korea_txt.split('\n')
+    aws_korea = soup.find("h2", {"class": "blog-post-title"})
+    aws_korea_title = aws_korea.text
 
-    aws_korea_title = aws_korea_list[0]
+    aws_korea_url = aws_korea.find('a')['href']
 
-    aws_korea_date = aws_korea_list[1].split('|')
-    aws_korea_date = aws_korea_date[1].split(' ')
-    aws_korea_date = aws_korea_date[4] + '-' + aws_korea_date[3] + '-' + aws_korea_date[2]
-    aws_korea_date = date_form(aws_korea_date)
-
-    aws_korea_url = aws_korea.find_element_by_css_selector('a').get_attribute('href')
+    aws_korea_date = soup.find("time", {"property": "datePublished"})
+    aws_korea_date = aws_korea_date.text.split(' ')
+    aws_korea_date = aws_korea_date[2] + '-' + aws_korea_date[1] + '-' + aws_korea_date[0]
 
     aws_korea_output = create_output(aws_korea_title, aws_korea_date, aws_korea_url)
-    output['AWS 한국 블로그'] = aws_korea_output
+    output['AWS 한국 블록,'] = aws_korea_output
 
     '''
     Naver Labs
     요약 있음
     '''
     naver_labs_home = 'https://www.naverlabs.com/storyList'
-    driver.get(naver_labs_home)
-    naver_labs = driver.find_element_by_css_selector('div.recent-list')
-    naver_labs_txt = naver_labs.text
-    naver_labs_list = naver_labs_txt.split('\n')
+    req = requests.get(naver_labs_home)
+    html = req.text
+    soup = BeautifulSoup(html, 'html.parser')
 
-    naver_labs_title = naver_labs_list[1]
+    naver_labs = soup.find("div", {"class": "featured-list"})
+    naver_labs_title = naver_labs.find('a').text
+    naver_labs_url = 'https://www.naverlabs.com' + naver_labs.find('a')['href']
 
-    naver_labs_date = naver_labs_list[3].split(' ')
-    naver_labs_date = naver_labs_date[0].replace('.', '-')
-
-    naver_labs_url = naver_labs.find_element_by_css_selector('a').get_attribute('href')
-
+    naver_labs_date = soup.find("span", {"class": "date"})
+    naver_labs_date = naver_labs_date.text
     naver_labs_output = create_output(naver_labs_title, naver_labs_date, naver_labs_url)
-
-    output['NAVER LABS'] = naver_labs_output
+    output['naver_labs'] = naver_labs_output
 
     '''
     TensorFlow
     요약 있음
     '''
     tensorflow_home = 'https://medium.com/tensorflow'
-    driver.get(tensorflow_home)
-    tensorflow = driver.find_element_by_css_selector('div.u-lineHeightBase.postItem.u-marginRight3')
-    tensorflow_title = tensorflow.text
+    req = requests.get(tensorflow_home)
+    html = req.text
+    soup = BeautifulSoup(html, 'html.parser')
 
-    tensorflow_date = driver.find_element_by_css_selector(
-        'div.ui-caption.u-fontSize12.u-baseColor--textNormal.u-textColorNormal.js-postMetaInlineSupplemental'
-    )
-    tensorflow_date = tensorflow_date.find_element_by_css_selector('time').get_attribute('datetime')
+    tensorflow = soup.find("div", {"class": "u-lineHeightBase postItem u-marginRight3"})
+
+    tensorflow_title = tensorflow.text
+    tensorflow_url = tensorflow.find('a')['href']
+
+    tensorflow_date = soup.find("div", {
+        "class": "ui-caption u-fontSize12 u-baseColor--textNormal u-textColorNormal js-postMetaInlineSupplemental"})
+    tensorflow_date = tensorflow_date.find('time')['datetime']
     tensorflow_date = tensorflow_date.split('T')[0]
 
-    tensorflow_url = tensorflow.find_element_by_css_selector('a').get_attribute('href')
-
     tensorflow_output = create_output(tensorflow_title, tensorflow_date, tensorflow_url)
-
-    output['TensorFlow'] = tensorflow_output
+    output['tensorflow'] = tensorflow_output
 
     '''
     지그재그

@@ -142,22 +142,21 @@ def crawling():
     요약 없음
     카테고리 다양
     '''
-    ncsoft_home = 'http://blog.ncsoft.com/?cat=3786'
+    ncsoft_home = 'https://blog.ncsoft.com/rd/all/'
     req = requests.get(ncsoft_home)
     html = req.text
     soup = BeautifulSoup(html, 'html.parser')
 
-    ncsoft = soup.find("h2", {"class": "sgny-post-title sgny-masonary-post-title"})
+    ncsoft = soup.find("div", {"class": "cont"})
 
-    ncsoft_title = ncsoft.find('a').text
-    ncsoft_url = ncsoft_home + ncsoft.find('a')['href']
+    ncsoft_title = ncsoft.find('h3').text
+    ncsoft_url = ncsoft.find('a')['href']
 
-    ncsoft_date = soup.find("span", {"class": "sgny-post-date"}).text
-    ncsoft_date = ncsoft_date.replace('\t', '')
-    ncsoft_date = ncsoft_date.replace('\n', '')
+    ncsoft_date = ncsoft.find("div", {"class": "date"}).text
+    ncsoft_date = ncsoft_date.replace('.', '-')
 
     ncsoft_output = create_output(ncsoft_title, ncsoft_date, ncsoft_url)
-    output['NC Soft'] = ncsoft_output
+    output['ncsoft'] = ncsoft_output
 
     '''
     SUALAB

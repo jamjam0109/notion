@@ -6,25 +6,23 @@ from utils import date_form, create_output
 
 output = dict()
 
-sualab_home = 'https://engineering.linecorp.com/ko/blog/'
-req = requests.get(sualab_home)
+ncsoft_home = 'https://meetup.toast.com'
+req = requests.get(ncsoft_home)
 html = req.text
 soup = BeautifulSoup(html, 'html.parser')
 
-sualab = soup.find("div", {"class": "entry-header-text-top text-left"})
+ncsoft = soup.find("ul", {"class": "lst_type"})
 
-sualab_title = sualab.find('a').text
-print(sualab_title)
-sualab_url = sualab.find('a')['href']
-print(sualab_url)
-sualab_date = soup.find("span", {"class": "byline"}).text
-sualab_date = sualab_date.split('| ')
-print(sualab_date )
-# sualab_date = sualab_date[2] + '-' + sualab_date[0] + '-' + sualab_date[1]
-# sualab_date = date_form(sualab_date)
+ncsoft_url = ncsoft.find('a')['href']
+print(ncsoft.text)
+# ncsoft_title = ncsoft.find('h3').text
+# ncsoft_url = ncsoft.find('a')['href']
 #
-# sualab_output = create_output(sualab_title, sualab_date, sualab_url)
-# output['SUALAB'] = sualab_output
+# ncsoft_date = ncsoft.find("div", {"class": "date"}).text
+# ncsoft_date = ncsoft_date.replace('.', '-')
+#
+# ncsoft_output = create_output(ncsoft_title, ncsoft_date, ncsoft_url)
+# output['ncsoft'] = ncsoft_output
 
 print(output)
 

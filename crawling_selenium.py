@@ -150,7 +150,7 @@ def crawling():
     요약 없음
     카테고리 다양
     '''
-    ncsoft_home = 'http://blog.ncsoft.com/?cat=3786'
+    ncsoft_home = 'https://blog.ncsoft.com/rd/all/'
     driver.get(ncsoft_home)
 
     ncsoft_home = driver.find_element_by_css_selector(

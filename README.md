@@ -27,12 +27,7 @@ Python과 Notion을 활용하여 기술 블로그 리스트 만들기
     2. 지금 해보자  
 ## 변경이력
 
-<details><summary>190726</summary>
-<p>
-
-* ncsoft UI 변경 됨
-
-</p>
+* 190726 ncsoft UI 변경 됨 - 190724 수정완료
     
  ## 참고
 * <a href="https://github.com/jamalex/notion-py" target="_blank">Unofficial Python 3 client for Notion API</a>

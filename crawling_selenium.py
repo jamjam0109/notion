@@ -154,15 +154,15 @@ def crawling():
     driver.get(ncsoft_home)
 
     ncsoft_home = driver.find_element_by_css_selector(
-        'h2.sgny-post-title.sgny-masonary-post-title'
+        'div.top_ps_bx'
     )
+    ncsoft_list = ncsoft_home.text
+    ncsoft_list = ncsoft_list.split('\n')
+    ncsoft_title = ncsoft_list[1]
 
-    ncsoft_title = ncsoft_home.text
+    ncsoft_date = ncsoft_list[3]
+    ncsoft_date = ncsoft_date.replace('.', '-')
     ncsoft_url = ncsoft_home.find_element_by_css_selector('a').get_attribute('href')
-
-    ncsoft_date = driver.find_element_by_css_selector(
-        'div.text-uppercase.sgny-post-meta.sgny-masonary-post-meta'
-    ).text
 
     ncsoft_output = create_output(ncsoft_title, ncsoft_date, ncsoft_url)
 

@@ -24,15 +24,14 @@ Python과 Notion을 활용하여 기술 블로그 리스트 만들기
     
 * 190709
     1. 응. 위에있는 계획 하나도 안했어
-    2. 지금 해보자  
+    2. 지금 해보자 
+    3. 아무것도 안함 ..
+
+* 190724 
+    1. 오랜만에 수정. ncsoft 셀레니움 변경완료 
 ## 변경이력
 
-<details><summary>190726</summary>
-<p>
-
-* ncsoft UI 변경 됨
-
-</p>
+* 190726 ncsoft UI 변경 됨 - 190724 수정완료
     
  ## 참고
 * <a href="https://github.com/jamalex/notion-py" target="_blank">Unofficial Python 3 client for Notion API</a>

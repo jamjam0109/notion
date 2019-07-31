@@ -33,6 +33,7 @@ Python과 Notion을 활용하여 기술 블로그 리스트 만들기
 * 190731
     1. 뷰티풀숲으로 대체
     2. 지그재그, 엔비디아, 티몬 못함 .. 
+    3. git ignore 안먹어 왜..
     
  ## 참고
 * <a href="https://github.com/jamalex/notion-py" target="_blank">Unofficial Python 3 client for Notion API</a>

@@ -28,10 +28,11 @@ Python과 Notion을 활용하여 기술 블로그 리스트 만들기
     3. 아무것도 안함 ..
 
 * 190724 
-    1. 오랜만에 수정. ncsoft 셀레니움 변경완료 
-## 변경이력
+    1. ncsoft 셀레니움 변경완료 
 
-* 190726 ncsoft UI 변경 됨 - 190724 수정완료
+* 190731
+    1. 뷰티풀숲으로 대체
+    2. 지그재그, 엔비디아, 티몬 못함 .. 
     
  ## 참고
 * <a href="https://github.com/jamalex/notion-py" target="_blank">Unofficial Python 3 client for Notion API</a>

@@ -85,6 +85,7 @@ def crawling():
     woowabros_date = woowabros_date.replace(',', '')
     woowabros_date = woowabros_date.split(' ')
     woowabros_date = woowabros_date[2] + '-' + woowabros_date[0] + '-' + woowabros_date[1]
+    woowabros_date = date_form(woowabros_date)
 
     woowabros_output = create_output(woowabros_title, woowabros_date, woowabros_url)
     output['우아한형제들'] = woowabros_output
@@ -95,52 +96,30 @@ def crawling():
     시간 오래걸림
     '''
     samsung_sds_home = 'https://www.samsungsds.com/global/ko/support/insights/index.html'
-    driver.get(samsung_sds_home)
+    req = requests.get(samsung_sds_home)
+    req.encoding = None
+    html = req.text
+    soup = BeautifulSoup(html, 'html.parser')
 
-    samsung_sds = driver.find_element_by_class_name('thumb_title')
+    samsung_sds = soup.find("div", {"class": "inWrap"})
 
-    samsung_sds_title = samsung_sds.text
-    samsung_sds_date = driver.find_element_by_class_name('thumb_date').text
+    samsung_sds_title = samsung_sds.find('a').text
+    samsung_sds_url = 'https://www.samsungsds.com' + samsung_sds.find('a')['href']
 
-    samsung_sds_onclcik = samsung_sds.find_element_by_css_selector('a').get_attribute('onclick')
-    samsung_sds_onclcik = samsung_sds_onclcik.split('(')[1]
-    samsung_sds_onclcik = samsung_sds_onclcik.split(',')[0]
-    samsung_sds_onclcik = samsung_sds_onclcik.replace("'", '')
+    article = samsung_sds_url
+    req = requests.get(article)
+    html = req.text
+    soup = BeautifulSoup(html, 'html.parser')
 
-    samsung_sds_url = 'https://www.samsungsds.com/' + samsung_sds_onclcik
+    samsung_sds_date = soup.find("span", {"class": "post_date"}).text
 
     samsung_sds_output = create_output(samsung_sds_title, samsung_sds_date, samsung_sds_url)
-
     output['삼성 SDS'] = samsung_sds_output
 
-    '''
-    NVIDIA
-    요약 있음
-    카테고리가 넘모 많음, 일단 딥러닝만 
-    시간이 넘모 걸림
-    403 error 뜸
-    '''
-    nvidia_home = 'https://blogs.nvidia.co.kr/category/deep-learning/'
-    driver.get(nvidia_home)
-
-    nvidia = driver.find_element_by_class_name('category-loop-items')
-    nvidia_title = nvidia.text
-    nvidia_title = nvidia_title.split('\n')
-    nvidia_title = nvidia_title[0]
-
-    nvidia_url = nvidia.find_element_by_css_selector('a').get_attribute('href')
-
-    nvidia_url_split = nvidia_url.split('/')
-    nvidia_date = nvidia_url_split[3] + '-' + nvidia_url_split[4] + '-' + nvidia_url_split[5]
-
-    nvidia_output = create_output(nvidia_title, nvidia_date, nvidia_url)
-
-    output['NVIDIA'] = nvidia_output
 
     '''
     nc soft
     요약 없음
-    카테고리 다양
     '''
     ncsoft_home = 'https://blog.ncsoft.com/rd/all/'
     req = requests.get(ncsoft_home)
@@ -199,6 +178,7 @@ def crawling():
     line_engine_date = soup.find("span", {"class": "byline"}).text
     line_engine_date = line_engine_date.split('|')[1]
     line_engine_date = line_engine_date.replace(u'\xa0', u'')
+    line_engine_date = line_engine_date.replace('.', '-')
 
     line_engine_output = create_output(line_engine_title, line_engine_date, line_engine_url)
     output['line_engine'] = line_engine_output
@@ -207,24 +187,24 @@ def crawling():
     TOAST
     요약 있음
     '''
-    toast_home = 'https://meetup.toast.com'
-    driver.get(toast_home)
-    toast = driver.find_element_by_css_selector('div.sec_box')
-    toast_txt = toast.text
-
-    toast_list = toast_txt.split('\n')
-
-    toast_title = toast_list[0]
-
-    toast_date = toast_list[2].split(' ')
-    toast_date = toast_date[1].replace('.', '-')
-
-    toast_url = driver.find_element_by_css_selector('li.lst_item.ng-scope')
-    toast_url = toast_url.find_element_by_css_selector('a').get_attribute('href')
-
-    toast_output = create_output(toast_title, toast_date, toast_url)
-
-    output['TOAST'] = toast_output
+    # toast_home = 'https://meetup.toast.com'
+    # driver.get(toast_home)
+    # toast = driver.find_element_by_css_selector('div.sec_box')
+    # toast_txt = toast.text
+    #
+    # toast_list = toast_txt.split('\n')
+    #
+    # toast_title = toast_list[0]
+    #
+    # toast_date = toast_list[2].split(' ')
+    # toast_date = toast_date[1].replace('.', '-')
+    #
+    # toast_url = driver.find_element_by_css_selector('li.lst_item.ng-scope')
+    # toast_url = toast_url.find_element_by_css_selector('a').get_attribute('href')
+    #
+    # toast_output = create_output(toast_title, toast_date, toast_url)
+    #
+    # output['TOAST'] = toast_output
 
     '''
     AWS 한국 블로그
@@ -243,9 +223,10 @@ def crawling():
     aws_korea_date = soup.find("time", {"property": "datePublished"})
     aws_korea_date = aws_korea_date.text.split(' ')
     aws_korea_date = aws_korea_date[2] + '-' + aws_korea_date[1] + '-' + aws_korea_date[0]
+    aws_korea_date = date_form(aws_korea_date)
 
     aws_korea_output = create_output(aws_korea_title, aws_korea_date, aws_korea_url)
-    output['AWS 한국 블록,'] = aws_korea_output
+    output['AWS 한국 블로그'] = aws_korea_output
 
     '''
     Naver Labs
@@ -262,6 +243,8 @@ def crawling():
 
     naver_labs_date = soup.find("span", {"class": "date"})
     naver_labs_date = naver_labs_date.text
+    naver_labs_date = naver_labs_date.replace('.', '-')
+
     naver_labs_output = create_output(naver_labs_title, naver_labs_date, naver_labs_url)
     output['naver_labs'] = naver_labs_output
 
@@ -288,29 +271,6 @@ def crawling():
     output['tensorflow'] = tensorflow_output
 
     '''
-    지그재그
-    '''
-    zigzag_home = 'https://brunch.co.kr/@zigzag#articles'
-    driver.get(zigzag_home)
-    zigzag = driver.find_element_by_css_selector('li.animation_up')
-    zigzag_txt = zigzag.text
-
-    zigzag_list = zigzag_txt.split('\n')
-
-    zigzag_title = zigzag_list[0]
-
-    zigzag_date = zigzag_list[-1]
-    zigzag_date = zigzag_date.replace('.', '')
-    zigzag_date = zigzag_date.split(' ')
-    zigzag_date = zigzag_date[2] + '-' + zigzag_date[0] + '-' + zigzag_date[1]
-    zigzag_date = date_form(zigzag_date)
-
-    zigzag_url = zigzag.find_element_by_css_selector('a').get_attribute('href')
-
-    zigzag_output = create_output(zigzag_title, zigzag_date, zigzag_url)
-    output['지그재그'] = zigzag_output
-
-    '''
     브랜디
     '''
     brandi_home = 'http://labs.brandi.co.kr'
@@ -327,24 +287,70 @@ def crawling():
 
     brandi_output = create_output(brandi_title, brandi_date, brandi_url)
     output['브랜디'] = brandi_output
+    '''
+    지그재그
+    '''
+    # zigzag_home = 'https://brunch.co.kr/@zigzag#articles'
+    # driver.get(zigzag_home)
+    # zigzag = driver.find_element_by_css_selector('li.animation_up')
+    # zigzag_txt = zigzag.text
+    #
+    # zigzag_list = zigzag_txt.split('\n')
+    #
+    # zigzag_title = zigzag_list[0]
+    #
+    # zigzag_date = zigzag_list[-1]
+    # zigzag_date = zigzag_date.replace('.', '')
+    # zigzag_date = zigzag_date.split(' ')
+    # zigzag_date = zigzag_date[2] + '-' + zigzag_date[0] + '-' + zigzag_date[1]
+    # zigzag_date = date_form(zigzag_date)
+    #
+    # zigzag_url = zigzag.find_element_by_css_selector('a').get_attribute('href')
+    #
+    # zigzag_output = create_output(zigzag_title, zigzag_date, zigzag_url)
+    # output['지그재그'] = zigzag_output
+
 
     '''
     티몬
     '''
-    tmon_home = 'http://blog.naver.com/PostList.nhn?blogId=tmondev&categoryNo=0&from=postList'
-    driver.get(tmon_home)
-    tmon = driver.find_element_by_css_selector('span.ell2.pcol2')
-    tmon_title = tmon.text
+    # tmon_home = 'http://blog.naver.com/PostList.nhn?blogId=tmondev&categoryNo=0&from=postList'
+    # driver.get(tmon_home)
+    # tmon = driver.find_element_by_css_selector('span.ell2.pcol2')
+    # tmon_title = tmon.text
+    #
+    # tmon_url = tmon.find_element_by_css_selector('a').get_attribute('href')
+    #
+    # tmon_date = driver.find_element_by_css_selector('td.date').text
+    # tmon_date = tmon_date.replace('.', '')
+    # tmon_date = tmon_date.replace(' ', '-')
+    # tmon_date = date_form(tmon_date)
+    #
+    # tmon_output = create_output(tmon_title, tmon_date, tmon_url)
+    # output['티몬'] = tmon_output
 
-    tmon_url = tmon.find_element_by_css_selector('a').get_attribute('href')
+    '''
+    NVIDIA
+    요약 있음
+    카테고리가 넘모 많음, 일단 딥러닝만 
+    시간이 넘모 걸림
+    403 error 뜸
+    '''
+    # nvidia_home = 'https://blogs.nvidia.co.kr/category/deep-learning/'
+    # driver.get(nvidia_home)
+    #
+    # nvidia = driver.find_element_by_class_name('category-loop-items')
+    # nvidia_title = nvidia.text
+    # nvidia_title = nvidia_title.split('\n')
+    # nvidia_title = nvidia_title[0]
+    #
+    # nvidia_url = nvidia.find_element_by_css_selector('a').get_attribute('href')
+    #
+    # nvidia_url_split = nvidia_url.split('/')
+    # nvidia_date = nvidia_url_split[3] + '-' + nvidia_url_split[4] + '-' + nvidia_url_split[5]
+    #
+    # nvidia_output = create_output(nvidia_title, nvidia_date, nvidia_url)
+    #
+    # output['NVIDIA'] = nvidia_output
 
-    tmon_date = driver.find_element_by_css_selector('td.date').text
-    tmon_date = tmon_date.replace('.', '')
-    tmon_date = tmon_date.replace(' ', '-')
-    tmon_date = date_form(tmon_date)
-
-    tmon_output = create_output(tmon_title, tmon_date, tmon_url)
-    output['티몬'] = tmon_output
-
-    driver.close()
     return output

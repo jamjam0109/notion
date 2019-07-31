@@ -4,47 +4,43 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from utils import date_form, create_output
 
-chromedriver_path = './chromedriver_v75'
+# chromedriver_path = './chromedriver_v75'
 
-driver = webdriver.Chrome(chromedriver_path)
+# driver = webdriver.Chrome(chromedriver_path)
 
 output = dict()
 
-# ncsoft_home = 'https://meetup.toast.com'
-# req = requests.get(ncsoft_home)
-# html = req.text
-# soup = BeautifulSoup(html, 'html.parser')
-#
-# ncsoft = soup.find("ul", {"class": "lst_type"})
-#
-# ncsoft_url = ncsoft.find('a')['href']
-# print(ncsoft.text)
-# ncsoft_title = ncsoft.find('h3').text
-# ncsoft_url = ncsoft.find('a')['href']
-#
-# ncsoft_date = ncsoft.find("div", {"class": "date"}).text
-# ncsoft_date = ncsoft_date.replace('.', '-')
-#
-# ncsoft_output = create_output(ncsoft_title, ncsoft_date, ncsoft_url)
-# output['ncsoft'] = ncsoft_output
+samsung_sds_home = 'https://meetup.toast.com'
+req = requests.get(samsung_sds_home)
+# req.encoding = None
+html = req.text
+soup = BeautifulSoup(html, 'html.parser')
 
-ncsoft_home = 'https://blog.ncsoft.com/rd/all/'
-driver.get(ncsoft_home)
+# samsung_sds = soup.find("div", {"class": "section_inner"})
 
-ncsoft_home = driver.find_element_by_css_selector(
-    'div.top_ps_bx'
-)
-ncsoft_list = ncsoft_home.text
-ncsoft_list = ncsoft_list.split('\n')
-ncsoft_title = ncsoft_list[1]
+line_engine_url = soup.find("div", {"class": "section_inner"})
+# print(line_engine_url)
+a = line_engine_url.find("ul", {"class": "lst_type"})
+line_engine_url = a.find('a')
+print(line_engine_url )
 
-ncsoft_date = ncsoft_list[3]
-ncsoft_date = ncsoft_date.replace('.', '-')
-ncsoft_url = ncsoft_home.find_element_by_css_selector('a').get_attribute('href')
+# print(samsung_sds )
+# aws_korea_url = samsung_sds.find("ul", {"class": "list_article list_post1 #post_list"})
+# print(aws_korea_url )
 
-ncsoft_output = create_output(ncsoft_title, ncsoft_date, ncsoft_url)
 
-output['ncsoft'] = ncsoft_output
+# # samsung_sds_url = 'https://www.samsungsds.com' + samsung_sds.find('a')['href']
+# #
+# # article = samsung_sds_url
+# # req = requests.get(article)
+# # html = req.text
+# # soup = BeautifulSoup(html, 'html.parser')
+# #
+# # samsung_sds_date = soup.find("span", {"class": "post_date"}).text
+# #
+# # samsung_sds_output = create_output(samsung_sds_title, samsung_sds_date, samsung_sds_url)
+# # output['삼성 SDS'] = samsung_sds_output
+# #
 
 print(output)
 

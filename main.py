@@ -1,7 +1,7 @@
 from notion.client import *
 from notion.block import *
 from datetime import datetime
-from crawling_beautifulsoup import crawling
+from crawling import crawling
 
 
 def main(token, notion_page_url, crawling_output):

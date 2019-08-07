@@ -58,7 +58,7 @@ def crawling():
 
     woowabros = soup.find("div", {"class": "list-module"})
     woowabros_title = woowabros.find('h2').text
-    woowabros_url = woowabros.find('a')['href']
+    woowabros_url = woowabros_home + woowabros.find('a')['href']
 
     woowabros_date = woowabros.find('span').text
     woowabros_date = woowabros_date.split('\n')

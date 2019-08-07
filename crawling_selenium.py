@@ -153,9 +153,7 @@ def crawling():
     ncsoft_home = 'https://blog.ncsoft.com/rd/all/'
     driver.get(ncsoft_home)
 
-    ncsoft_home = driver.find_element_by_css_selector(
-        'div.top_ps_bx'
-    )
+    ncsoft_home = driver.find_element_by_css_selector('div.top_ps_bx')
     ncsoft_list = ncsoft_home.text
     ncsoft_list = ncsoft_list.split('\n')
     ncsoft_title = ncsoft_list[1]

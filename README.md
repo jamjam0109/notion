@@ -35,6 +35,15 @@ Python과 Notion을 활용하여 기술 블로그 리스트 만들기
     2. 지그재그, 엔비디아, 티몬 못함 .. 
     3. git ignore 안먹어 왜..
     
+* 190803
+    1. 셀레니움과 뷰티풀숲(티몬, 지그재그, 엔비디아)의 조화로움으로 대체..
+    2. 그래도 해결 못한  [NAVER D2](https://d2.naver.com/home).. 어떻게 크롤링해야하는지 알려주세요
+    3. 남은 기업블로그
+        1. 라온피플
+        2. 엔씨소프트 분석기술 블로그
+        3. 당근마켓
+        4. 카카오브레인
+        5. VCNC
+        
  ## 참고
-* <a href="https://github.com/jamalex/notion-py" target="_blank">Unofficial Python 3 client for Notion API</a>
-
+ [Unofficial Python 3 client for Notion API](https://github.com/jamalex/notion-py)

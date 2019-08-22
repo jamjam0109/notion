@@ -45,5 +45,7 @@ Python과 Notion을 활용하여 기술 블로그 리스트 만들기
         4. 카카오브레인
         5. VCNC
         
+* 190807
+    1. 추가하고 싶은 것: check box를 넣어서 check 된 애는 남겨두는거(나중에 읽기 위해)
  ## 참고
  [Unofficial Python 3 client for Notion API](https://github.com/jamalex/notion-py)
